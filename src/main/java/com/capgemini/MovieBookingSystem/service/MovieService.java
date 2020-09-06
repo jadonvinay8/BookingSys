@@ -40,6 +40,7 @@ public class MovieService {
 	public Movie removeMovie(String theaterId, String movieId) {
 		Movie movie = findById(movieId);
 		updateAttachedTheater(theaterId, movie, false);
+		movieDAO.delete(movie);
 		return movie;
 	}
 	

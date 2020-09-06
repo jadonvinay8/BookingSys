@@ -46,6 +46,7 @@ public class TheaterService {
 	public Theater removeTheater(String cityId, String theaterId) {
 		Theater theater = findTheaterById(theaterId);
 		updateAttachedCity(cityId, theater, false);
+		theaterDAO.delete(theater);
 		return theater;
 	}
 	
