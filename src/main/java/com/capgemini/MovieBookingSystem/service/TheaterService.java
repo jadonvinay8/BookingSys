@@ -13,6 +13,12 @@ import com.capgemini.MovieBookingSystem.entities.City;
 import com.capgemini.MovieBookingSystem.entities.Theater;
 import com.capgemini.MovieBookingSystem.exception.ResourceNotFoundException;
 
+/** 
+ * Service class to perform CRUD operations related to Theater functionality
+ * 
+ * @author Vinay Pratap Singh
+ *
+ */
 @Service
 public class TheaterService {
 
@@ -22,9 +28,13 @@ public class TheaterService {
 	@Autowired
 	private LocationService locationService;
 	
+	
+	public Theater findTheaterById(String id) {
+		return theaterDAO.findById(id).orElseThrow(ResourceNotFoundException::new);
+	}
+	
 	public List<ShortMovie> getMovies(String id) {
-		Theater theater = theaterDAO.findById(id).orElseThrow(ResourceNotFoundException::new);
-		return theater.getMovies();
+		return findTheaterById(id).getMovies();
 	}
 	
 	public Theater addTheater(String cityId, Theater theater) {
@@ -34,7 +44,7 @@ public class TheaterService {
 	}
 	
 	public Theater removeTheater(String cityId, String theaterId) {
-		Theater theater = theaterDAO.findById(theaterId).orElseThrow(ResourceNotFoundException::new);
+		Theater theater = findTheaterById(theaterId);
 		updateAttachedCity(cityId, theater, false);
 		return theater;
 	}
@@ -45,14 +55,18 @@ public class TheaterService {
 		
 		if (add) {
 			theaters.add(new ShortTheater(theater.getTheatreId(), theater.getTheatreName()));
-		}
-		else {
-			theaters = theaters.stream().filter(theater1 -> !(theater1.getId().equals(theater.getTheatreId())))
+		} else {
+			theaters = theaters.stream().filter(shortTheater -> !shortTheater.getId().equals(theater.getTheatreId()))
 										.collect(Collectors.toList());
-		}
-			
+		}	
 		city.setTheaters(theaters);
 		locationService.updateCity(city);
+	}
+	
+	public Theater updateTheater(Theater theater) {
+		String cityId = theater.getCity().getId();
+		removeTheater(cityId, theater.getTheatreId());
+		return addTheater(cityId, theater);
 	}
 	
 }

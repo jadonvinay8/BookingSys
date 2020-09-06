@@ -11,6 +11,12 @@ import com.capgemini.MovieBookingSystem.dao.LocationDAO;
 import com.capgemini.MovieBookingSystem.entities.City;
 import com.capgemini.MovieBookingSystem.exception.ResourceNotFoundException;
 
+/** 
+ * Service class to perform CRUD operations related to Location functionality
+ * 
+ * @author Vinay Pratap Singh
+ *
+ */
 @Service
 public class LocationService {
 
@@ -36,7 +42,7 @@ public class LocationService {
 	}
 	
 	public City deleteCity(String id) {
-		City city = locationDAO.findById(id).orElseThrow(ResourceNotFoundException::new);
+		City city = findById(id);
 		locationDAO.delete(city);
 		return city;
 	}
