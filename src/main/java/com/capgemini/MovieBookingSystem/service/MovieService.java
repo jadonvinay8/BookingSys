@@ -12,7 +12,7 @@ import com.capgemini.MovieBookingSystem.beans.ShortTheater;
 import com.capgemini.MovieBookingSystem.dao.MovieDAO;
 import com.capgemini.MovieBookingSystem.entities.Movie;
 import com.capgemini.MovieBookingSystem.entities.Theater;
-import com.capgemini.MovieBookingSystem.exception.ResourceNotFoundException;
+import com.capgemini.MovieBookingSystem.exception.MovieNotFoundException;
 
 /**
  * Service class having functionality to interact with Movies
@@ -23,17 +23,18 @@ import com.capgemini.MovieBookingSystem.exception.ResourceNotFoundException;
 @Service
 public class MovieService {
 
-	private final boolean ADD_MOVIE = true;
-	private final boolean REMOVE_MOVIE = false;
-
 	@Autowired
 	private MovieDAO movieDAO;
 
 	@Autowired
 	private TheaterService theaterService;
+	
+	private final static boolean ADD_MOVIE = true;
+	private final static boolean REMOVE_MOVIE = false;
+	
 
 	public Movie findById(String id) {
-		return movieDAO.findById(id).orElseThrow(ResourceNotFoundException::new);
+		return movieDAO.findById(id).orElseThrow(MovieNotFoundException::new);
 	}
 
 	public List<Movie> findAll() {
@@ -102,7 +103,7 @@ public class MovieService {
 	}
 	
 	public Movie updateMovie(Movie movie) {
-		movieDAO.delete(findById(movie.getMovieId()));
+		findById(movie.getMovieId()); // if this movie didn't exist previously, an exception will be thrown
 		return movieDAO.save(movie);
 	}
 

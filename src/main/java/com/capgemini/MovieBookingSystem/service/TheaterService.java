@@ -12,7 +12,7 @@ import com.capgemini.MovieBookingSystem.dao.TheaterDAO;
 import com.capgemini.MovieBookingSystem.entities.City;
 import com.capgemini.MovieBookingSystem.entities.Movie;
 import com.capgemini.MovieBookingSystem.entities.Theater;
-import com.capgemini.MovieBookingSystem.exception.ResourceNotFoundException;
+import com.capgemini.MovieBookingSystem.exception.TheaterNotFoundException;
 
 /**
  * Service class to perform CRUD operations related to Theater functionality
@@ -32,9 +32,12 @@ public class TheaterService {
 	@Autowired
 	private MovieService movieService;
 	
+	private final static boolean ADD_THEATER = true;
+	private final static boolean REMOVE_THEATER = false;
+	
 
 	public Theater findTheaterById(String id) {
-		return theaterDAO.findById(id).orElseThrow(ResourceNotFoundException::new);
+		return theaterDAO.findById(id).orElseThrow(TheaterNotFoundException::new);
 	}
 
 	public List<ShortMovie> getMovies(String id) {
@@ -43,14 +46,14 @@ public class TheaterService {
 
 	public Theater addTheater(String cityId, Theater theater) {
 		Theater savedTheater = theaterDAO.save(theater);
-		updateAttachedCity(cityId, savedTheater, true);
+		updateAttachedCity(cityId, savedTheater, ADD_THEATER);
 		return savedTheater;
 	}
 
 	public Theater removeTheater(String cityId, String theaterId) {
 		Theater theater = findTheaterById(theaterId);
 		theater.getMovies().forEach(movie -> removeTheaterFromAttachedMovieList(movie, theater));
-		updateAttachedCity(cityId, theater, false);
+		updateAttachedCity(cityId, theater, REMOVE_THEATER);
 		theaterDAO.delete(theater);
 		return theater;
 	}
@@ -79,9 +82,8 @@ public class TheaterService {
 	}
 
 	public Theater updateTheater(Theater theater) {
-		String cityId = theater.getCity().getId();
-		removeTheater(cityId, theater.getTheatreId());
-		return addTheater(cityId, theater);
+		findTheaterById(theater.getTheatreId()); // if this theater didn't exist previously, an exception will be thrown
+		return theaterDAO.save(theater);
 	}
 
 }

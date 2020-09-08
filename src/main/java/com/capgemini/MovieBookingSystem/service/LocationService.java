@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.MovieBookingSystem.dao.LocationDAO;
 import com.capgemini.MovieBookingSystem.entities.City;
-import com.capgemini.MovieBookingSystem.exception.ResourceNotFoundException;
+import com.capgemini.MovieBookingSystem.exception.CityNotFoundException;
 
 /**
  * Service class to perform CRUD operations related to Location functionality
@@ -32,11 +32,11 @@ public class LocationService {
 	}
 
 	public City findById(String id) {
-		return locationDAO.findById(id).orElseThrow(ResourceNotFoundException::new);
+		return locationDAO.findById(id).orElseThrow(CityNotFoundException::new);
 	}
 
 	public City updateCity(City city) {
-		deleteCity(city.getId());
+		findById(city.getId()); // if this city didn't exist previously, an exception will be thrown
 		return locationDAO.save(city);
 	}
 
