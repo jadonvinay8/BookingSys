@@ -1,7 +1,6 @@
 package com.capgemini.MovieBookingSystem.entities;
 
 import java.util.Date;
-
 import java.util.List;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
@@ -11,9 +10,9 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 import com.capgemini.MovieBookingSystem.beans.Address;
 import com.capgemini.MovieBookingSystem.beans.CardDetails;
-import com.capgemini.MovieBookingSystem.beans.EnumConverter;
 import com.capgemini.MovieBookingSystem.beans.ShortBooking;
 import com.capgemini.MovieBookingSystem.enums.Role;
+import com.capgemini.MovieBookingSystem.enums.RoleConverter;
 
 @DynamoDBTable(tableName = "Customer")
 public class Customer {
@@ -119,7 +118,7 @@ public class Customer {
 	public void setSavedCards(List<CardDetails> savedCards) {
 		this.savedCards = savedCards;
 	}
-	@DynamoDBTypeConverted(converter = EnumConverter.class)
+	@DynamoDBTypeConverted(converter = RoleConverter.class)
 	public Role getRole() {
 		return role;
 	}

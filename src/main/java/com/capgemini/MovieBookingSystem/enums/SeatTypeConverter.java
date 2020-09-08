@@ -1,9 +1,8 @@
-package com.capgemini.MovieBookingSystem.beans;
+package com.capgemini.MovieBookingSystem.enums;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
-import com.capgemini.MovieBookingSystem.enums.SeatType;
 
-public class EnumConverter implements DynamoDBTypeConverter<String, SeatType> {
+public class SeatTypeConverter implements DynamoDBTypeConverter<String, SeatType> {
 
 	@Override
 	public String convert(SeatType object) {
