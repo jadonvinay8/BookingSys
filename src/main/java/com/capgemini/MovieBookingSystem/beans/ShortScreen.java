@@ -1,5 +1,6 @@
 package com.capgemini.MovieBookingSystem.beans;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 
 @DynamoDBDocument
@@ -22,7 +23,7 @@ public class ShortScreen {
 		super();
 		this.name = name;
 	}
-
+	@DynamoDBAttribute
 	public String getId() {
 		return id;
 	}
@@ -30,7 +31,7 @@ public class ShortScreen {
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	@DynamoDBAttribute
 	public String getName() {
 		return name;
 	}

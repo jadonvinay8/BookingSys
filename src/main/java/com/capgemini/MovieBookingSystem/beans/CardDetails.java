@@ -1,5 +1,8 @@
 package com.capgemini.MovieBookingSystem.beans;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
+@DynamoDBDocument
 public class CardDetails {
 	
 	private	String cardNumber;
@@ -16,7 +19,7 @@ public class CardDetails {
 		this.dateofExpiry = dateofExpiry;
 		this.nameOnCard = nameOnCard;
 	}
-
+	@DynamoDBAttribute
 	public String getCardNumber() {
 		return cardNumber;
 	}
@@ -24,7 +27,7 @@ public class CardDetails {
 	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
-
+	@DynamoDBAttribute
 	public String getDateofExpiry() {
 		return dateofExpiry;
 	}
@@ -32,7 +35,7 @@ public class CardDetails {
 	public void setDateofExpiry(String dateofExpiry) {
 		this.dateofExpiry = dateofExpiry;
 	}
-
+	@DynamoDBAttribute
 	public String getNameOnCard() {
 		return nameOnCard;
 	}

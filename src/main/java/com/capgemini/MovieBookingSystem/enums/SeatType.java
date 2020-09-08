@@ -1,4 +1,4 @@
-package com.capgemini.MovieBookingSystem.beans;
+package com.capgemini.MovieBookingSystem.enums;
 
 public enum SeatType {
 	GOLD,

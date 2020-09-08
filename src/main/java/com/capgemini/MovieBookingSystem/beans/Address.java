@@ -1,5 +1,6 @@
 package com.capgemini.MovieBookingSystem.beans;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 
 @DynamoDBDocument
@@ -21,7 +22,7 @@ public class Address {
 		this.addressLine1 = addressLine1;
 		this.pincode = pincode;
 	}
-
+	@DynamoDBAttribute
 	public String getCity() {
 		return city;
 	}
@@ -29,7 +30,7 @@ public class Address {
 	public void setCity(String city) {
 		this.city = city;
 	}
-
+	@DynamoDBAttribute
 	public String getState() {
 		return state;
 	}
@@ -37,7 +38,7 @@ public class Address {
 	public void setState(String state) {
 		this.state = state;
 	}
-
+	@DynamoDBAttribute
 	public String getAddressLine1() {
 		return addressLine1;
 	}
@@ -45,7 +46,7 @@ public class Address {
 	public void setAddressLine1(String addressLine1) {
 		this.addressLine1 = addressLine1;
 	}
-
+	@DynamoDBAttribute
 	public String getPincode() {
 		return pincode;
 	}
