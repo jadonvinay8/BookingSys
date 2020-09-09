@@ -1,0 +1,49 @@
+{
+     "userId" : "",
+	 "firstName" : "Shreesh",
+	 "lastName" : "Agrawal",
+	 "DOB" : "28/06/1968",
+	 "phone" : "9753636111",
+	 "email" : "shreesh@gmail.com",
+	 "password" : "Tgdfgkksafn",
+	 "imgPath" : "htfhhjhj",
+	 "bookings" : "",
+	 "favoritePlaces" : "",
+	 "savedCards" : "",
+	 "role" : "CUSTOMER"
+}
+{
+	 "firstName" : "Shreesh",
+	 "lastName" : "Agrawal",
+	 "DOB" : "28/06/1968",
+	 "phone" : "9753636111",
+	 "email" : "shreesh@gmail.com",
+	 "password" : "Tgdfgkksafn",
+	 "imgPath" : "htfhhjhj",
+	 "role" : "CUSTOMER"
+}
+{
+	 "firstName" : "dhgf",
+	 "lastName" : "Agrawal",
+	 "DOB" : "28/06/1968",
+	 "phone" : "9753636111",
+	 "email" : "shreesh@gmail.com",
+	 "password" : "Tgdfgkksafn",
+	 "imgPath" : "htfhhjhj",
+	 "role" : "CUSTOMER",
+     "bookings": [{"id":"ytuf","name":"20"}]
+}
+
+CustomBooking {
+	"bookingId" : " ",
+	"theaterDetails" : " ",
+	"dateOfShow" : " ",
+	"showTiming" : " ",
+	"screenName" : " ",
+	"movieName" : " ",
+	"amount" : " ",
+	"bookedSeats" : " ",
+	"transactionId" : " ",
+	"seatPlanId" : " ",
+	"bookingStatus" : " "
+}

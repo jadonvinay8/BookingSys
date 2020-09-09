@@ -20,14 +20,9 @@ import com.capgemini.MovieBookingSystem.entities.Theater;
 import com.capgemini.MovieBookingSystem.service.LocationService;
 import com.capgemini.MovieBookingSystem.service.TheaterService;
 
-/**
- * Controller having End-points related to location
- * 
- * @author Vinay Pratap Singh
- *
- */
+
 @RestController
-@RequestMapping("/cities")
+@RequestMapping("/screens")
 public class ScreenController {
 	
 	@Autowired

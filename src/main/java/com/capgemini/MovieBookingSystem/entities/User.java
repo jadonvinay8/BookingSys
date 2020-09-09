@@ -1,5 +1,6 @@
 package com.capgemini.MovieBookingSystem.entities;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +15,8 @@ import com.capgemini.MovieBookingSystem.beans.ShortBooking;
 import com.capgemini.MovieBookingSystem.enums.Role;
 import com.capgemini.MovieBookingSystem.enums.RoleConverter;
 
-@DynamoDBTable(tableName = "Customer")
-public class Customer {
+@DynamoDBTable(tableName = "User")
+public class User {
 	private String userId;
 	private String firstName;
 	private String lastName;
@@ -60,7 +61,8 @@ public class Customer {
 	}
 
 	public void setDOB(Date dOB) {
-		DOB = dOB;
+		DOB=Date.from(Instant.now());
+//		DOB = dOB;
 	}
 	@DynamoDBAttribute
 	public String getPhone() {

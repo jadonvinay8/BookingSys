@@ -1,33 +1,29 @@
 package com.capgemini.MovieBookingSystem.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capgemini.MovieBookingSystem.dao.CustomerDao;
-import com.capgemini.MovieBookingSystem.entities.Customer;
+import com.capgemini.MovieBookingSystem.dao.SeatPlanDao;
+import com.capgemini.MovieBookingSystem.entities.SeatPlan;
 import com.capgemini.MovieBookingSystem.exception.CityNotFoundException;
 
 @Service
 public class SeatPlanService {
 
 	@Autowired
-	private CustomerDao customerDao;
+	private SeatPlanDao seatPlanDao;
 
-	public Customer addCustomer(Customer city) {
-		return customerDao.save(city);
+	public SeatPlan addCustomer(SeatPlan city) {
+		return seatPlanDao.save(city);
 	}
 
-	public Customer findById(String id) {
-		return customerDao.findById(id).orElseThrow(CityNotFoundException::new);
+	public SeatPlan findById(String id) {
+		return seatPlanDao.findById(id).orElseThrow(CityNotFoundException::new);
 	}
 
-	public Customer updateCity(Customer city) {
-		findById(city.getUserId()); // if this city didn't exist previously, an exception will be thrown
-		return customerDao.save(city);
+	public SeatPlan updateCity(SeatPlan city) {
+		findById(city.getSeatPlanId()); // if this city didn't exist previously, an exception will be thrown
+		return seatPlanDao.save(city);
 	}
 
 

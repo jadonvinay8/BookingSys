@@ -9,72 +9,73 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capgemini.MovieBookingSystem.beans.ShortTheater;
-import com.capgemini.MovieBookingSystem.entities.City;
-import com.capgemini.MovieBookingSystem.entities.Theater;
-import com.capgemini.MovieBookingSystem.service.LocationService;
-import com.capgemini.MovieBookingSystem.service.TheaterService;
+import com.capgemini.MovieBookingSystem.entities.User;
+import com.capgemini.MovieBookingSystem.service.UserService;
 
-/**
- * Controller having End-points related to location
- * 
- * @author Vinay Pratap Singh
- *
- */
+
 @RestController
-@RequestMapping("/cities")
+@RequestMapping("/users")
 public class UserController {
 	
 	@Autowired
-	private LocationService locationService;
+	private UserService userService;
 	
-	@Autowired
-	private TheaterService theaterService;
+//	private DynamoDBMapper dynamoDBMapper;
+//  
+//	@Autowired
+//	private AmazonDynamoDB amazonDynamoDB;
+//
+//	@PostConstruct
+//	public void setup() {
+//		dynamoDBMapper = new DynamoDBMapper(amazonDynamoDB);
+//      CreateTableRequest tableRequest = dynamoDBMapper.generateCreateTableRequest(User.class);
+//      tableRequest.setProvisionedThroughput(new ProvisionedThroughput(1L, 1L)); 
+//      amazonDynamoDB.createTable(tableRequest);
+//	}
 	
 	
 	@GetMapping
-	public ResponseEntity<List<City>> getAllCities() {
-		return new ResponseEntity<List<City>>(locationService.getAllCities(), HttpStatus.OK);
+	public ResponseEntity<List<User>> getAllCities() {
+		return new ResponseEntity<List<User>>(userService.findAll(), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<City> addCity(@RequestBody City city) {
-		return new ResponseEntity<City>(locationService.addCity(city), HttpStatus.CREATED);
+	public ResponseEntity<User> addUser(@RequestBody User city) {
+		return new ResponseEntity<User>(userService.addUser(city), HttpStatus.CREATED);
 	}
 	
-	@PutMapping
-	public ResponseEntity<City> updateCity(@RequestBody City city) {
-		return new ResponseEntity<City>(locationService.updateCity(city), HttpStatus.OK);
-	}
+//	@PutMapping
+//	public ResponseEntity<City> updateCity(@RequestBody City city) {
+//		return new ResponseEntity<City>(locationService.updateCity(city), HttpStatus.OK);
+//	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<City> findCityById(@PathVariable("id") String id) {
-		return new ResponseEntity<City>(locationService.findById(id), HttpStatus.OK);
+	public ResponseEntity<User> findCityById(@PathVariable("id") String id) {
+		return new ResponseEntity<User>(userService.findById(id), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<City> deleteCity(@PathVariable("id") String id) {
-		return new ResponseEntity<City>(locationService.deleteCity(id), HttpStatus.OK);
+	public ResponseEntity<User> deleteUser(@PathVariable("id") String id) {
+		return new ResponseEntity<User>(userService.deleteUser(id), HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}/theaters")
-	public ResponseEntity<List<ShortTheater>> getTheaters(@PathVariable("id") String id) {
-		return new ResponseEntity<List<ShortTheater>>(locationService.findById(id).getTheaters(), HttpStatus.OK);		
-	}
-	
-	@PostMapping("/{id}/theaters")
-	public ResponseEntity<Theater> addTheater(@PathVariable("id") String cityId, @RequestBody Theater theater) {
-		return new ResponseEntity<Theater>(theaterService.addTheater(cityId, theater), HttpStatus.CREATED);
-	}
-	
-	@DeleteMapping("/{id}/theaters/{theaterId}")
-	public ResponseEntity<Theater> removeTheater(@PathVariable("id") String cityId, @PathVariable("theaterId") String theaterId) {
-		return new ResponseEntity<Theater>(theaterService.removeTheater(cityId, theaterId), HttpStatus.OK);
-	}
+//	@GetMapping("/{id}/theaters")
+//	public ResponseEntity<List<ShortTheater>> getTheaters(@PathVariable("id") String id) {
+//		return new ResponseEntity<List<ShortTheater>>(locationService.findById(id).getTheaters(), HttpStatus.OK);		
+//	}
+//	
+//	@PostMapping("/{id}/theaters")
+//	public ResponseEntity<Theater> addTheater(@PathVariable("id") String cityId, @RequestBody Theater theater) {
+//		return new ResponseEntity<Theater>(theaterService.addTheater(cityId, theater), HttpStatus.CREATED);
+//	}
+//	
+//	@DeleteMapping("/{id}/theaters/{theaterId}")
+//	public ResponseEntity<Theater> removeTheater(@PathVariable("id") String cityId, @PathVariable("theaterId") String theaterId) {
+//		return new ResponseEntity<Theater>(theaterService.removeTheater(cityId, theaterId), HttpStatus.OK);
+//	}
 	
 }
